@@ -100,6 +100,14 @@ public class Recipe {
         this.image = image;
     }
 
+    public Set<Ingridient> getIngridients() {
+        return ingridients;
+    }
+
+    public void setIngridients(Set<Ingridient> ingridients) {
+        this.ingridients = ingridients;
+    }
+
     public Note getNote() {
         return note;
     }
