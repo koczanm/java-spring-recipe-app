@@ -1,6 +1,7 @@
 package pl.mateuszkoczan.springframework.recipeapp.domains;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -15,6 +16,8 @@ public class Recipe {
     private Integer servings;
     private String source;
     private String url;
+
+    @Lob
     private String directions;
 
     @Enumerated(value = EnumType.STRING)
@@ -24,7 +27,7 @@ public class Recipe {
     private Byte[] image;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-    private Set<Ingridient> ingridients;
+    private Set<Ingredient> ingredients = new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL)
     private Note note;
@@ -33,7 +36,7 @@ public class Recipe {
     @JoinTable(name = "recipe_category",
         joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Set<Category> categories;
+    private Set<Category> categories = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -115,12 +118,12 @@ public class Recipe {
         this.image = image;
     }
 
-    public Set<Ingridient> getIngridients() {
-        return ingridients;
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
     }
 
-    public void setIngridients(Set<Ingridient> ingridients) {
-        this.ingridients = ingridients;
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 
     public Note getNote() {
@@ -128,7 +131,10 @@ public class Recipe {
     }
 
     public void setNote(Note note) {
-        this.note = note;
+        if (note != null) {
+            this.note = note;
+            note.setRecipe(this);
+        }
     }
 
     public Set<Category> getCategories() {
@@ -137,5 +143,12 @@ public class Recipe {
 
     public void setCategories(Set<Category> categories) {
         this.categories = categories;
+    }
+
+    public Recipe addIngredient(Ingredient ingredient) {
+        ingredient.setRecipe(this);
+        this.ingredients.add(ingredient);
+
+        return this;
     }
 }
