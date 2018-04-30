@@ -1,8 +1,10 @@
 package pl.mateuszkoczan.springframework.recipeapp.bootstrap;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import pl.mateuszkoczan.springframework.recipeapp.domains.*;
 import pl.mateuszkoczan.springframework.recipeapp.repositories.CategoryRepository;
 import pl.mateuszkoczan.springframework.recipeapp.repositories.RecipeRepository;
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Component
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
     private final CategoryRepository categoryRepository;
@@ -27,7 +30,10 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
     }
 
     @Override
+    @Transactional
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+        log.debug("Loading Bootstrap Data");
+
         recipeRepository.saveAll(getRecipes());
     }
 
@@ -95,7 +101,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         Recipe guacamoleRecipe = new Recipe();
         guacamoleRecipe.setDescription("Perfect Guacamole");
         guacamoleRecipe.setPrepTime(10);
-        guacamoleRecipe.setCockTime(0);
+        guacamoleRecipe.setCookTime(0);
         guacamoleRecipe.setDifficulty(Difficulty.EASY);
         guacamoleRecipe.setDirections("1. Cut avocado, remove flesh: Cut the avocados in half. Remove seed. Score the" +
                 " inside of the avocado with a blunt knife and scoop out the flesh with a spoon" +
@@ -168,7 +174,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         Recipe tacosRecipe = new Recipe();
         tacosRecipe.setDescription("Spicy Grilled Chicken Taco");
         tacosRecipe.setPrepTime(20);
-        tacosRecipe.setCockTime(9);
+        tacosRecipe.setCookTime(9);
         tacosRecipe.setDifficulty(Difficulty.MODERATE);
 
         tacosRecipe.setDirections("1. Prepare a gas or charcoal grill for medium-high, direct heat." +
