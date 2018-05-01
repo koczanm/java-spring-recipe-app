@@ -8,10 +8,10 @@ import pl.mateuszkoczan.springframework.recipeapp.servies.RecipeService;
 
 @Slf4j
 @Controller
-public class indexController {
+public class IndexController {
     private final RecipeService recipeService;
 
-    public indexController(RecipeService recipeService) {
+    public IndexController(RecipeService recipeService) {
         this.recipeService = recipeService;
     }
 
