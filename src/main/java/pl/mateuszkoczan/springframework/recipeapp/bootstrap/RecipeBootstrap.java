@@ -40,37 +40,37 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
     private List<Recipe> getRecipes() {
         List<Recipe> recipes = new ArrayList<>(2);
 
-        Optional<UnitOfMeasure> eachUOMOptional = unitOfMeasureRepository.findByDescription("Each");
+        Optional<UnitOfMeasure> eachUOMOptional = unitOfMeasureRepository.findByDescription("each");
 
         if (!eachUOMOptional.isPresent()) {
             throw new RuntimeException("Expected UOM Not Found");
         }
 
-        Optional<UnitOfMeasure> tablespoonUOMOptional = unitOfMeasureRepository.findByDescription("Tablespoon");
+        Optional<UnitOfMeasure> tablespoonUOMOptional = unitOfMeasureRepository.findByDescription("tablespoon");
 
         if (!tablespoonUOMOptional.isPresent()) {
             throw new RuntimeException("Expected UOM Not Found");
         }
 
-        Optional<UnitOfMeasure> teaspoonUOMOptional = unitOfMeasureRepository.findByDescription("Teaspoon");
+        Optional<UnitOfMeasure> teaspoonUOMOptional = unitOfMeasureRepository.findByDescription("teaspoon");
 
         if (!teaspoonUOMOptional.isPresent()) {
             throw new RuntimeException("Expected UOM Not Found");
         }
 
-        Optional<UnitOfMeasure> dashUOMOptional = unitOfMeasureRepository.findByDescription("Dash");
+        Optional<UnitOfMeasure> dashUOMOptional = unitOfMeasureRepository.findByDescription("dash");
 
         if (!dashUOMOptional.isPresent()) {
             throw new RuntimeException("Expected UOM Not Found");
         }
 
-        Optional<UnitOfMeasure> pintUOMOptional = unitOfMeasureRepository.findByDescription("Pint");
+        Optional<UnitOfMeasure> pintUOMOptional = unitOfMeasureRepository.findByDescription("pint");
 
         if (!pintUOMOptional.isPresent()) {
             throw new RuntimeException("Expected UOM Not Found");
         }
 
-        Optional<UnitOfMeasure> cupUOMOptional = unitOfMeasureRepository.findByDescription("Cup");
+        Optional<UnitOfMeasure> cupUOMOptional = unitOfMeasureRepository.findByDescription("cup");
 
         if (!cupUOMOptional.isPresent()) {
             throw new RuntimeException("Expected UOM Not Found");
