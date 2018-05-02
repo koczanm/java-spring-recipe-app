@@ -9,7 +9,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 import pl.mateuszkoczan.springframework.recipeapp.domains.Recipe;
-import pl.mateuszkoczan.springframework.recipeapp.servies.RecipeService;
+import pl.mateuszkoczan.springframework.recipeapp.services.RecipeService;
 
 import java.util.HashSet;
 import java.util.Set;
