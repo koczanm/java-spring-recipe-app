@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Recipe Form</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+          rel="stylesheet"
+          crossorigin="anonymous"
+          th:href="@{/webjars/bootstrap/4.1.0/css/bootstrap.min.css}"/>
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+            th:src="@{/webjars/jquery/3.3.1-1/jquery.min.js}"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+            crossorigin="anonymous"
+            th:src="@{/webjars/bootstrap/4.1.0/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container-fluid" style="...">
+    <div class="row mt-2 mb-10">
+        <div class="col-md-6 mx-auto">
+            <form th:object="${recipe}" th:action="@{/recipe/}" method="post">
+                <input type="hidden" th:field="*{id}"/>
+                <div class="card mb-2">
+                    <div class="card-header">
+                        <h5 class="card-title">Edit Recipe Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12 form-group">
+                                <label>Recipe Description:</label>
+                                <input type="text" class="form-control" th:field="*{description}"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 form-group">
+                                <label>Categories:</label>
+                            </div>
+                            <div class="col-md-8 form-group">
+                                <div class="radio">
+                                    <input type="checkbox" value=""/>
+                                    Cat 1
+                                </div>
+                                <div class="radio" th:remove="all">
+                                    <input type="checkbox" value=""/>
+                                    Cat 2
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 form-group">
+                                <label>Prep Time:</label>
+                                <input type="text" class="form-control" th:field="*{prepTime}"/>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label>Cook time:</label>
+                                <input type="text" class="form-control" th:field="*{cookTime}"/>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label>Difficulty:</label>
+                                <select class="form-control">
+                                    <option>Easy</option>
+                                    <option>Medium</option>
+                                    <option>Hard</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 form-group">
+                                <label>Servings:</label>
+                                <input type="text" class="form-control" th:field="*{servings}"/>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label>Source:</label>
+                                <input type="text" class="form-control" th:field="*{source}"/>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label>URL:</label>
+                                <input type="text" class="form-control" th:field="*{url}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-2">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-11">
+                                <h5 class="card-title">Ingredients</h5>
+                            </div>
+                            <div class="col-md-1">
+                                <a class="btn btn-ling float-right" href="#" role="button">Edit</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ul>
+                                    <li th:remove="all">1 cup of milk</li>
+                                    <li th:remove="all">1 teaspoon of chocolate</li>
+                                    <li th:each="ingredient : ${recipe.ingredients}"
+                                        th:text="${(ingredient.amount +
+                                        ' ' + ingredient.uom.description +
+                                        ' - ' + ingredient.description)}">1 teaspoon of sugar
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-2">
+                    <div class="card-header">
+                        <h5 class="card-title">Directions</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12 form-group">
+                                <textarea class="form-control" rows="3" th:field="*{directions}"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-2">
+                    <div class="card-header">
+                        <h5 class="card-title">Notes</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12 form-group">
+                                <textarea class="form-control fill" rows="3" th:field="*{note.recipeNote}"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success float-right">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
