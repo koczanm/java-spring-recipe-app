@@ -19,15 +19,15 @@ public class UnitOfMeasureRepositoryIT {
 
     @Test
     public void findByDescription() {
-        Optional<UnitOfMeasure> teaspoonUOMOptional = unitOfMeasureRepository.findByDescription("Teaspoon");
+        Optional<UnitOfMeasure> teaspoonUOMOptional = unitOfMeasureRepository.findByDescription("teaspoon");
 
-        assertEquals("Teaspoon", teaspoonUOMOptional.get().getDescription());
+        assertEquals("teaspoon", teaspoonUOMOptional.get().getDescription());
     }
 
     @Test
     public void findByDescription2() {
-        Optional<UnitOfMeasure> teaspoonUOMOptional = unitOfMeasureRepository.findByDescription("Cup");
+        Optional<UnitOfMeasure> teaspoonUOMOptional = unitOfMeasureRepository.findByDescription("cup");
 
-        assertEquals("Cup", teaspoonUOMOptional.get().getDescription());
+        assertEquals("cup", teaspoonUOMOptional.get().getDescription());
     }
 }
