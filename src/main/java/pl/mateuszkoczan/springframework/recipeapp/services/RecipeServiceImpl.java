@@ -50,7 +50,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     @Transactional
-    public RecipeCommand findCommandById(Long id) {
+    public RecipeCommand findRecipeCommandById(Long id) {
         return recipeToRecipeCommand.convert(findRecipeById(id));
     }
 
