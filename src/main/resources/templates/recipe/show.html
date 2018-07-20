@@ -97,7 +97,7 @@
                                 <li th:remove="all">1 cup of milk</li>
                                 <li th:remove="all">1 teaspoon of chocolate</li>
                                 <li th:each="ingredient : ${recipe.ingredients}"
-                                    th:text="${ingredient.amount + ' ' + ingredient.uom.description + ' ' +
+                                    th:text="${ingredient.amount + ' ' + ingredient.unitOfMeasure.description + ' ' +
                                     ingredient.description}">1 teaspoon of sugar
                                 </li>
                             </ul>
