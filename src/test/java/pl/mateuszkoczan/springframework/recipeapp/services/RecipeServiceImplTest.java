@@ -37,7 +37,7 @@ public class RecipeServiceImplTest {
     }
 
     @Test
-    public void getRecipesById() {
+    public void getRecipeById() {
         Recipe recipe = new Recipe();
         recipe.setId(1L);
         Optional<Recipe> recipeOptional = Optional.of(recipe);
@@ -64,5 +64,13 @@ public class RecipeServiceImplTest {
         assertEquals(recipeSet.size(), 1);
         verify(recipeRepository, times(1)).findAll();
         verify(recipeRepository, never()).findById(anyLong());
+    }
+
+    @Test
+    public void deleteRecipe() {
+        Long id = 2L;
+        recipeService.deleteById(id);
+
+        verify(recipeRepository, times(1)).deleteById(anyLong());
     }
 }
