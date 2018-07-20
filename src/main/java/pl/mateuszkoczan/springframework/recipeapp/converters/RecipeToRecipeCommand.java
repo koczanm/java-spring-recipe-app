@@ -9,9 +9,15 @@ import pl.mateuszkoczan.springframework.recipeapp.domains.Recipe;
 
 @Component
 public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand> {
+    private IngredientToIngredientCommand ingredientConverter;
+    private CategoryToCategoryCommand categoryConverter;
     private NoteToNoteCommand noteConverter;
 
-    public RecipeToRecipeCommand(NoteToNoteCommand noteConverter) {
+    public RecipeToRecipeCommand(IngredientToIngredientCommand ingredientConverter,
+                                 CategoryToCategoryCommand categoryConverter,
+                                 NoteToNoteCommand noteConverter) {
+        this.ingredientConverter = ingredientConverter;
+        this.categoryConverter = categoryConverter;
         this.noteConverter = noteConverter;
     }
 
@@ -34,9 +40,17 @@ public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand> {
         recipeCommand.setDirections(recipe.getDirections());
         recipeCommand.setDifficulty(recipe.getDifficulty());
         recipeCommand.setImage(recipe.getImage());
-        recipeCommand.setIngredients(recipe.getIngredients());
         recipeCommand.setNote(noteConverter.convert(recipe.getNote()));
-        recipeCommand.setCategories(recipe.getCategories());
+
+        if (recipe.getIngredients() != null && recipe.getIngredients().size() > 0) {
+            recipe.getIngredients()
+                    .forEach(ingredient -> recipeCommand.getIngredients().add(ingredientConverter.convert(ingredient)));
+        }
+
+        if (recipe.getCategories() != null && recipe.getCategories().size() > 0) {
+            recipe.getCategories()
+                    .forEach(category -> recipeCommand.getCategories().add(categoryConverter.convert(category)));
+        }
 
         return recipeCommand;
     }
