@@ -3,9 +3,7 @@ package pl.mateuszkoczan.springframework.recipeapp.commands;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.mateuszkoczan.springframework.recipeapp.domains.Category;
 import pl.mateuszkoczan.springframework.recipeapp.domains.Difficulty;
-import pl.mateuszkoczan.springframework.recipeapp.domains.Ingredient;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,7 +22,7 @@ public class RecipeCommand {
     private String directions;
     private Difficulty difficulty;
     private Byte[] image;
-    private Set<Ingredient> ingredients = new HashSet<>();
+    private Set<IngredientCommand> ingredients = new HashSet<>();
     private NoteCommand note;
-    private Set<Category> categories = new HashSet<>();
+    private Set<CategoryCommand> categories = new HashSet<>();
 }
