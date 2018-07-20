@@ -21,12 +21,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 public class RecipeControllerTest {
-    MockMvc mockMvc;
+    private MockMvc mockMvc;
 
-    RecipeController recipeController;
+    private RecipeController recipeController;
 
     @Mock
-    RecipeService recipeService;
+    private RecipeService recipeService;
 
     @Before
     public void setUp() throws Exception {
