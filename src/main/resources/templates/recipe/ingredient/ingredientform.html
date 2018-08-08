@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Show Recipe</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+          rel="stylesheet"
+          crossorigin="anonymous"
+          th:href="@{/webjars/bootstrap/4.1.0/css/bootstrap.min.css}"/>
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+            th:src="@{/webjars/jquery/3.3.1-1/jquery.min.js}"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+            crossorigin="anonymous"
+            th:src="@{/webjars/bootstrap/4.1.0/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row mt-2">
+        <div class="col-md-6 mx-auto">
+            <form th:object="${ingredient}" th:action="@{'/recipe/' + ${ingredient.recipeId} + '/ingredient'} "
+                  method="post">
+                <input type="hidden" th:field="*{id}"/>
+                <div class="card mb-2">
+                    <div class="card-header">
+                        <h5 class="card-title">Edit Ingredient Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 form-group">
+                                <label>Description:</label>
+                                <input type="text" class="form-control" th:field="*{description}"/>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label>Amount:</label>
+                                <input type="number" class="form-control" th:field="*{amount}"/>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label>Unit Of Measure:</label>
+                                <select class="form-control" name="unitOfMeasure.id">
+                                    <option th:each="unitOfMeasureEach : ${unitOfMeasureList}"
+                                            th:value="${unitOfMeasureEach.id}"
+                                            th:selected="${unitOfMeasureEach.id.equals(ingredient.unitOfMeasure.id)}"
+                                            th:text="${unitOfMeasureEach.description}">Each</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success float-right">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
