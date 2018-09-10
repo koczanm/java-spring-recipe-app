@@ -5,6 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.mateuszkoczan.springframework.recipeapp.commands.IngredientCommand;
+import pl.mateuszkoczan.springframework.recipeapp.commands.RecipeCommand;
+import pl.mateuszkoczan.springframework.recipeapp.commands.UnitOfMeasureCommand;
+import pl.mateuszkoczan.springframework.recipeapp.domains.Ingredient;
 import pl.mateuszkoczan.springframework.recipeapp.services.IngredientService;
 import pl.mateuszkoczan.springframework.recipeapp.services.RecipeService;
 import pl.mateuszkoczan.springframework.recipeapp.services.UnitOfMeasureService;
@@ -57,5 +60,22 @@ public class IngredientController {
 
         return "redirect:/recipe/" + savedIngredientCommand.getRecipeId() + "/ingredient/" +
                 savedIngredientCommand.getId() + "/show";
+    }
+
+    @GetMapping
+    @RequestMapping("recipe/{recipeId}/ingredient/new")
+    public String createIngredientForm(@PathVariable String recipeId, Model model) {
+        RecipeCommand recipeCommand = recipeService.findRecipeCommandById(Long.valueOf(recipeId));
+        // todo raise exception if null
+
+        IngredientCommand ingredientCommand = new IngredientCommand();
+        ingredientCommand.setRecipeId(Long.valueOf(recipeId));
+        model.addAttribute("ingredient", ingredientCommand);
+
+        ingredientCommand.setUnitOfMeasure(new UnitOfMeasureCommand());
+
+        model.addAttribute("unitOfMeasureList", unitOfMeasureService.getUnitOfMeasureList());
+
+        return "recipe/ingredient/ingredientform";
     }
 }
