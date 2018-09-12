@@ -63,9 +63,9 @@
                             <div class="col-md-4 form-group">
                                 <label>Difficulty:</label>
                                 <select class="form-control" th:field="*{difficulty}">
-                                    <option th:each="difficultyValue : ${T(pl.mateuszkoczan.springframework.recipeapp.domains.Difficulty).values()}"
-                                            th:value="${difficultyValue.name()}"
-                                            th:text="${difficultyValue.name()}">
+                                    <option th:each="difficultyVal: ${T(pl.mateuszkoczan.springframework.recipeapp.domains.Difficulty).values()}"
+                                            th:value="${difficultyVal}"
+                                            th:text="${difficultyVal}">
                                     </option>
                                 </select>
                                 <select class="form-control" th:remove="all">
@@ -109,9 +109,9 @@
                                     <li th:remove="all">1 cup of milk</li>
                                     <li th:remove="all">1 teaspoon of chocolate</li>
                                     <li th:each="ingredient : ${recipe.ingredients}"
-                                        th:text="${(ingredient.amount +
+                                        th:text="${ingredient.amount +
                                         ' ' + ingredient.unitOfMeasure.description +
-                                        ' - ' + ingredient.description)}">1 teaspoon of sugar
+                                        ' - ' + ingredient.description}">1 teaspoon of sugar
                                     </li>
                                 </ul>
                             </div>
